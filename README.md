@@ -6,12 +6,19 @@
 
 ## Description/Specs
 
-A program which allows management of salon Stylists and their associated Clients.
+A program which allows tracking of concert events at venues in Seattle.
+
+#### User Scenarios
+1. A program administrator can create a new database entry for a Venue. The admin can also edit and delete any and all venue records.
+2. A program administrator can create a new database entry for a band.
+3. A program administrator can view all venues, and select individual venues to view the details of which bands have played at that venue.
+4. A program administrator can view all bands, and select individual bands to view at which venues that particular band has played.
+5. A program administrator can create additional event records, tracking when a particular band has played at a particular venue.
+
 #### Data Model
 The data model consists of two classes, Band and Venue, which share a many:many relationship. The database tables (bands, venues) are linked by a join table (events):
 
 ![ERD](/Content/Images/model.PNG)
-
 
 #### Program Routing
 
@@ -33,32 +40,22 @@ The data model consists of two classes, Band and Venue, which share a many:many 
 |GET| /bands/{id}| Returns band.cshtml, Model |  Returns a Model containing a single selected Band, a list of all Venue instances associated with that Band, and a list of all existing Venue instances. |
 |POST| /band/add_venue| Returns success.cshtml| Adds a new association between a Band instance and an instance of a Venue; routes to a simple confirmation pae with link to home page|
 
-#### User Scenarios
-1. A program administrator can create a new database entry for a Venue. The admin can also edit and delete any and all venue records.
-2. A program administrator can create a new database entry for a band.
-3. A program administrator can view all venues, and select individual venues to view the details of which bands have played at that venue.
-4. A program administrator can view all bands, and select individual bands to view at which venues that particular band has played.
-5. A program administrator can create additional event records, tracking when a particular band has played at a particular venue.
-
-
 #### Use this program
 Clone this repository.
 
-Part 1. Prepare the database.
-
+_*Part 1. Prepare the database.*_
 The root folder of this project contains two database scripting files (band_tracker_test_script.sql for testing, band_tracker_test_script.sql for production). To import these databases, do the following:
 * Open SSMS
 * Select File > Open > File and select the appropriate .sql file.
 * Click !Execute.
 * The databases should appear in your database listing.
 
-Part 2. Run server and access the web app.
-
+_*Part 2. Run server and access the web app.*_
 Prepare your machine to run the Kestrel server by following the [instructions here.](https://www.learnhowtoprogram.com/c/getting-started-with-c/installing-c)
 To start the local server, type in "DNX Kestrel" at a command prompt in the root directory of your project. Navigate in your browser to "LocalHost:5004" to view the homepage.
 
 #### Known Bugs / Unimplemented Features
-*TBD
+TBD
 
 #### Support and contact details
 Please contact the authors if you have any questions or comments.
