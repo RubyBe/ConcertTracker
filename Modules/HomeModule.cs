@@ -1,4 +1,6 @@
 using Nancy;
+using System;
+using System.Generic.Collections;
 
 namespace BandTracker
 {
@@ -6,7 +8,19 @@ namespace BandTracker
   {
     public HomeModule()
     {
-      Get["/"] = _ => "Hey Hey Hello";
+      Get["/"] = _ =>
+      {
+        List<Venue> allVenues = new List<Venue>{};
+        return View("index.html", allVenues);
+      };
+      Get["/bands"] = _ => {
+        List<Band> AllBands = Band.GetAll();
+        return View["bands.cshtml", AllBands];
+      };
+      Get["/venues"] = _ => {
+        List<Venue> AllVenues = Venue.GetAll();
+        return View["venues.cshtml", AllVenues];
+      };
     }
   }
 }
