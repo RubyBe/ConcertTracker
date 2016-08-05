@@ -1,6 +1,6 @@
 using Nancy;
 
-namespace ConcertTracker
+namespace BandTracker
 {
   public class HomeModule : NancyModule
   {

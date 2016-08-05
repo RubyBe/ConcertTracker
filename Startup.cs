@@ -5,11 +5,11 @@ using Nancy.ViewEngines.Razor;
 using System.Collections.Generic;
 using System.IO;
 
-namespace ConcertTracker
+namespace BandTracker
 {
   public static class DBConfiguration
   {
-    public static string ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=salon;Integrated Security=SSPI;";
+    public static string ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=band_tracker;Integrated Security=SSPI;";
   }
   public class Startup
   {

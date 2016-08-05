@@ -8,7 +8,7 @@
 
 A program which allows management of salon Stylists and their associated Clients.
 #### Data Model
-The data model consists of two classes, Band and Venue which share a many:many relationships.
+The data model consists of two classes, Band and Venue, which share a many:many relationships.
 
 The bands data table contains the following fields:
 * id
@@ -22,7 +22,6 @@ A join table - events - joins the bands and venues tables and contains the follo
 * id
 * band_id
 * venue_id
-
 
 
 #### Program Routing
