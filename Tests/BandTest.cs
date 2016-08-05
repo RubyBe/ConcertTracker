@@ -46,5 +46,21 @@ namespace BandTracker
       //Assert
       Assert.Equal(testList, result);
     }
+    [Fact]
+    public void Test_Save_AssignsIdToBandObject()
+    {
+      //Arrange
+      Band testBand = new Band("Household chores");
+      testBand.Save();
+
+      //Act
+      Band savedBand = Band.GetAll()[0];
+
+      int result = savedBand.GetId();
+      int testId = testBand.GetId();
+
+      //Assert
+      Assert.Equal(testId, result);
+    }
   }
 }
