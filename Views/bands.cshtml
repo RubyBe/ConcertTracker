@@ -1,0 +1,19 @@
+@if (@Model.Count == 0)
+{
+<p>No bands have played at this venue yet!</p>
+}
+else
+{
+  <h1>Here is your list of bands:</h1>
+  <ul>
+    @foreach (var band in Model)
+    {
+      <li>@band.GetName()</li>
+    }
+  </ul>
+  <form action="/bands/delete" method="post">
+    <button type="submit">Clear all bands</button>
+  </form>
+}
+<p><a href="/bands/new">Add a new band</a></p>
+<p><a href="/">Return home</a></p>
