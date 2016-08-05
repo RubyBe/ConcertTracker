@@ -57,8 +57,8 @@ namespace BandTracker
       nameParameter.ParameterName = "@VenueName";
       nameParameter.Value = this.GetName();
       cmd.Parameters.Add(nameParameter);
-      SqlDataReader rdr = cmd.ExecuteReader();
 
+      SqlDataReader rdr = cmd.ExecuteReader();
       while(rdr.Read())
       {
         this._id = rdr.GetInt32(0);
@@ -83,8 +83,8 @@ namespace BandTracker
       venueIdParameter.ParameterName = "@VenueId";
       venueIdParameter.Value = id.ToString();
       cmd.Parameters.Add(venueIdParameter);
-      SqlDataReader rdr = cmd.ExecuteReader();
 
+      SqlDataReader rdr = cmd.ExecuteReader();
       int foundVenueId = 0;
       string foundVenueName = null;
       while(rdr.Read())
@@ -107,11 +107,13 @@ namespace BandTracker
     // a method to get all Venue records
     public static List<Venue> GetAll()
     {
-      List<Venue> allVenues = new List<Venue>{};
       SqlConnection conn = DB.Connection();
       conn.Open();
+
       SqlCommand cmd = new SqlCommand("SELECT * FROM venues;", conn);
+
       SqlDataReader rdr = cmd.ExecuteReader();
+      List<Venue> allVenues = new List<Venue>{};
       while(rdr.Read())
       {
         int id = rdr.GetInt32(0);
@@ -134,17 +136,17 @@ namespace BandTracker
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
-      SqlCommand cmd = new SqlCommand("UPDATE venues SET name = @NewName OUTPUT INSERTED.name WHERE id = @VenueId;", conn);
 
+      SqlCommand cmd = new SqlCommand("UPDATE venues SET name = @NewName OUTPUT INSERTED.name WHERE id = @VenueId;", conn);
       SqlParameter newNameParameter = new SqlParameter();
       newNameParameter.ParameterName = "@NewName";
       newNameParameter.Value = newName;
       cmd.Parameters.Add(newNameParameter);
-
       SqlParameter venueIdParameter = new SqlParameter();
       venueIdParameter.ParameterName = "@VenueId";
       venueIdParameter.Value = this.GetId();
       cmd.Parameters.Add(venueIdParameter);
+
       SqlDataReader rdr = cmd.ExecuteReader();
       while(rdr.Read())
       {
@@ -164,11 +166,13 @@ namespace BandTracker
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
+
       SqlCommand cmd = new SqlCommand("DELETE FROM venues WHERE id = @VenueId;", conn);
       SqlParameter venueIdParameter = new SqlParameter();
       venueIdParameter.ParameterName = "@VenueId";
       venueIdParameter.Value = this.GetId();
       cmd.Parameters.Add(venueIdParameter);
+
       cmd.ExecuteNonQuery();
       if (conn != null)
       {
@@ -180,7 +184,9 @@ namespace BandTracker
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
+
       SqlCommand cmd = new SqlCommand("DELETE FROM venues;", conn);
+
       cmd.ExecuteNonQuery();
       conn.Close();
     }
@@ -190,6 +196,7 @@ namespace BandTracker
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
+
       SqlCommand cmd = new SqlCommand("INSERT INTO events (venue_id, band_id) VALUES (@VenueId, @BandId);", conn);
       SqlParameter venueIdParameter = new SqlParameter();
       venueIdParameter.ParameterName = "@VenueId";
@@ -199,6 +206,7 @@ namespace BandTracker
       bandIdParameter.ParameterName = "@BandId";
       bandIdParameter.Value = newBand.GetId();
       cmd.Parameters.Add(bandIdParameter);
+
       cmd.ExecuteNonQuery();
       if (conn != null)
       {
@@ -210,13 +218,15 @@ namespace BandTracker
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
+
       SqlCommand cmd = new SqlCommand("SELECT bands.* FROM venues JOIN events ON (venues.id = events.venue_id) JOIN bands ON (events.band_id = bands.id) WHERE venues.id = @VenueId;", conn);
       SqlParameter VenueIdParameter = new SqlParameter();
       VenueIdParameter.ParameterName = "@VenueId";
       VenueIdParameter.Value = this.GetId().ToString();
       cmd.Parameters.Add(VenueIdParameter);
+
       SqlDataReader rdr = cmd.ExecuteReader();
-      List<Band> bands = new List<Band>{};      
+      List<Band> bands = new List<Band>{};
       while(rdr.Read())
       {
         int bandId = rdr.GetInt32(0);

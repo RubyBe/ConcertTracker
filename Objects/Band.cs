@@ -35,11 +35,13 @@ namespace BandTracker
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
+
       SqlCommand cmd = new SqlCommand("INSERT INTO bands (name) OUTPUT INSERTED.id VALUES (@BandName);", conn);
       SqlParameter nameParameter = new SqlParameter();
       nameParameter.ParameterName = "@BandName";
       nameParameter.Value = this.GetName();
       cmd.Parameters.Add(nameParameter);
+
       SqlDataReader rdr = cmd.ExecuteReader();
       while(rdr.Read())
       {
@@ -80,18 +82,16 @@ namespace BandTracker
       bandIdParameter.ParameterName = "@BandId";
       bandIdParameter.Value = id.ToString();
       cmd.Parameters.Add(bandIdParameter);
-      SqlDataReader rdr = cmd.ExecuteReader();
 
+      SqlDataReader rdr = cmd.ExecuteReader();
       int foundBandId = 0;
       string foundBandName = null;
-
       while(rdr.Read())
       {
         foundBandId = rdr.GetInt32(0);
         foundBandName = rdr.GetString(1);
       }
       Band foundBand = new Band(foundBandName, foundBandId);
-
       if (rdr != null)
       {
         rdr.Close();
@@ -105,12 +105,13 @@ namespace BandTracker
     // a method to return all Band object instances in a list
     public static List<Band> GetAll()
     {
-      List<Band> allBands = new List<Band>{};
       SqlConnection conn = DB.Connection();
       conn.Open();
-      SqlCommand cmd = new SqlCommand("SELECT * FROM bands;", conn);
-      SqlDataReader rdr = cmd.ExecuteReader();
 
+      SqlCommand cmd = new SqlCommand("SELECT * FROM bands;", conn);
+
+      SqlDataReader rdr = cmd.ExecuteReader();
+      List<Band> allBands = new List<Band>{};
       while(rdr.Read())
       {
         int bandId = rdr.GetInt32(0);
@@ -133,7 +134,9 @@ namespace BandTracker
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
+
       SqlCommand cmd = new SqlCommand("DELETE FROM bands;", conn);
+
       cmd.ExecuteNonQuery();
       conn.Close();
     }
@@ -143,6 +146,7 @@ namespace BandTracker
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
+
       SqlCommand cmd = new SqlCommand("INSERT INTO events (venue_id, band_id) VALUES (@VenueId, @BandId);", conn);
       SqlParameter venueIdParameter = new SqlParameter();
       venueIdParameter.ParameterName = "@VenueId";
@@ -152,6 +156,7 @@ namespace BandTracker
       bandIdParameter.ParameterName = "@BandId";
       bandIdParameter.Value = this.GetId();
       cmd.Parameters.Add(bandIdParameter);
+
       cmd.ExecuteNonQuery();
       if (conn != null)
       {
@@ -163,11 +168,13 @@ namespace BandTracker
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
+
       SqlCommand cmd = new SqlCommand("SELECT venues.* FROM bands JOIN events ON (bands.id = events.band_id) JOIN venues ON (events.venue_id = venues.id) WHERE bands.id = @BandId;", conn);
       SqlParameter BandIdParameter = new SqlParameter();
       BandIdParameter.ParameterName = "@BandId";
       BandIdParameter.Value = this.GetId().ToString();
       cmd.Parameters.Add(BandIdParameter);
+      
       SqlDataReader rdr = cmd.ExecuteReader();
       List<Venue> venues = new List<Venue>{};
       while(rdr.Read())
