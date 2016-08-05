@@ -5,7 +5,7 @@ using Nancy.ViewEngines.Razor;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Concerts
+namespace ConcertTracker
 {
   public static class DBConfiguration
   {
