@@ -8,34 +8,30 @@
 
 A program which allows management of salon Stylists and their associated Clients.
 #### Data Model
-The data model consists of two classes, Band and Venue, which share a many:many relationships.
+The data model consists of two classes, Band and Venue, which share a many:many relationship. The database tables (bands, venues) are linked by a join table (events):
 
-The bands data table contains the following fields:
-* id
-* name
-
-The venues data table contains the following fields:
-* id
-* name
-
-A join table - events - joins the bands and venues tables and contains the following fields:
-* id
-* band_id
-* venue_id
+![ERD](/Content/Images/model.PNG)
 
 
 #### Program Routing
 
 | Method       | Route           | Action  | Model/Comments |
 | ------------- |:-------------:| -----:| -----:|
-| GET| /| Returns index.cshtml, Model| Model is a list of all Stylist instances |
-| POST| /| Returns index.cshtml, Model| Model is a list of all Stylist instances, after saving a new stylist |
-| GET|/stylists/{id}| Returns stylist.cshtml, Model | Model is a dictionary containing the selected Stylist instance, and all associated Client instances |
-| GET| /stylist/edit/{id}| Returns stylist_edit.cshtml, Model| Model is a found Stylist instance to be updated |
-| PATCH| /stylist/edit/{id}| Returns success.cshtml| Updates Stylist information, routes to simple confirmation page with link to home page |
-| POST| /stylist/new| Returns success.cshtml | Creates and saves a new stylist, routes to simple confirmation page with link to home page |
-| GET| /stylist/delete/{id}| Returns stylist_delete.cshtml, Model| Model is a found Stylist instance to be deleted, along with all associated clients |
-| DELETE| /stylist/delete/{id}| Returns success.cshtml| Deletes a single Stylist instance, routes to simple confirmation page with link to home page |
+|GET| /| Returns index.cshtml | Informational page with links to view Seattle Venues and Bands |
+|GET|/venues | Returns venues.cshtml, Model | Model is a list of all instances of the Venue class; all venues are displayed with the ability to link to Edit/Delete views for each venue |
+|GET| /venues/new | Returns venues_form.cshtml| View returned allows addition of a new Venue |
+|POST| /venues/new | Returns success.cshtml| Adds a new Venue, routes to simple confirmation page with link to home page |
+|GET| /venues/{id}| Returns venue.cshml, Model | Model contains a specific Venue instance, a list of all bands which have played that venue, and a list of all bands in the database |
+|POST| /venue/add_band| Returns success.cshtml |  Adds a new association between an instance of a Band and an instance of a Venue, routes to simple confirmation page with link to home page |
+|GET| /venue/edit/{id}| Returns venue_edit.cshtml, Model| Model contains a single selected Venue, routes to a page with a form to edit the Venue name|
+|PATCH| /venue/edit/{id}| Returns success.cshtml | Updates Venue instance name and routes to a simple confirmation page with a link to home page |
+|GET|/venue/delete/{id} | Returns venue_delete.cshtml, Model | Model is a selected instance of the Venue class; view allows administrator to choose to delete instance |
+|DELETE|/venue/delete/{id} | Returns success.cshtml| Deletes a select instance of a Venue, routes to simple confirmation page with link to home page|
+|GET| /bands | Returns bands.cshtml, Model| Model contains all Band records in database, which are displayed in the view
+|GET| /bands/new | Returns bands_form.cshtml, Model| Model contains a list of all Bands in the database; view displays a form allowing user to add a new Band information |
+|POST| /bands/new|Returns success.cshtml | Adds a new Band to the database, routes to a simple confirmationpage with a link to home page |
+|GET| /bands/{id}| Returns band.cshtml, Model |  Returns a Model containing a single selected Band, a list of all Venue instances associated with that Band, and a list of all existing Venue instances. |
+|POST| /band/add_venue| Returns success.cshtml| Adds a new association between a Band instance and an instance of a Venue; routes to a simple confirmation pae with link to home page|
 
 #### User Scenarios
 1. A program administrator can create a new database entry for a Venue. The admin can also edit and delete any and all venue records.
