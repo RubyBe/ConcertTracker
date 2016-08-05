@@ -6,9 +6,15 @@
 <ul>
   @foreach (var venue in Model)
   {
-    <li><a href="/venues/@venue.GetId()">@venue.GetName()</a></li>
+    <li><a href="/venues/@venue.GetId()">@venue.GetName()</a>| <a href="/venue/edit/@venue.GetId()">Edit</a></li>
   }
 </ul>
 <hr />
 <a href="/venues/new">Add new venue</a>
+<a href="/"
 <h4><a href="/">Return Home</a></h4>
+
+<hr />
+form action="/venues/clear" method="post">
+  <button type="submit">Clear all Venues</button>
+</form>
