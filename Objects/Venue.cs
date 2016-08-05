@@ -184,5 +184,55 @@ namespace BandTracker
       cmd.ExecuteNonQuery();
       conn.Close();
     }
+    // methods to interact with the Band class
+    // a method to add a new link between a band and venue instance
+    public void AddBand(Band newBand)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlCommand cmd = new SqlCommand("INSERT INTO events (venue_id, band_id) VALUES (@VenueId, @BandId);", conn);
+      SqlParameter venueIdParameter = new SqlParameter();
+      venueIdParameter.ParameterName = "@VenueId";
+      venueIdParameter.Value = this.GetId();
+      cmd.Parameters.Add(venueIdParameter);
+      SqlParameter bandIdParameter = new SqlParameter();
+      bandIdParameter.ParameterName = "@BandId";
+      bandIdParameter.Value = newBand.GetId();
+      cmd.Parameters.Add(bandIdParameter);
+      cmd.ExecuteNonQuery();
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+    // a method to get all band instances associated with a venue instance
+    public List<Band> GetBands()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlCommand cmd = new SqlCommand("SELECT bands.* FROM venues JOIN events ON (venues.id = events.venue_id) JOIN bands ON (events.band_id = bands.id) WHERE venues.id = @VenueId;", conn);
+      SqlParameter VenueIdParameter = new SqlParameter();
+      VenueIdParameter.ParameterName = "@VenueId";
+      VenueIdParameter.Value = this.GetId().ToString();
+      cmd.Parameters.Add(VenueIdParameter);
+      SqlDataReader rdr = cmd.ExecuteReader();
+      List<Band> bands = new List<Band>{};      
+      while(rdr.Read())
+      {
+        int bandId = rdr.GetInt32(0);
+        string bandName = rdr.GetString(1);
+        Band newBand = new Band(bandName, bandId);
+        bands.Add(newBand);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return bands;
+    }
   }
 }

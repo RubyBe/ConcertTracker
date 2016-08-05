@@ -16,6 +16,7 @@ namespace BandTracker
     public void Dispose()
     {
       Venue.DeleteAll();
+      Band.DeleteAll();
     }
     [Fact]
     public void Test_DatabaseEmptyAtFirst()
@@ -100,6 +101,41 @@ namespace BandTracker
       List<Venue> testVenueList = new List<Venue> {testVenue2};
       //Assert
       Assert.Equal(testVenueList, resultVenues);
+    }
+    [Fact]
+    public void Test_AddBand_AddsBandToVenue()
+    {
+      //Arrange
+      Venue testVenue = new Venue("El Corazon");
+      testVenue.Save();
+      Band testBand = new Band("The Loud Mouths");
+      testBand.Save();
+      Band testBand2 = new Band("The People With Guitars ");
+      testBand2.Save();
+      //Act
+      testVenue.AddBand(testBand);
+      testVenue.AddBand(testBand2);
+      List<Band> result = testVenue.GetBands();
+      List<Band> testList = new List<Band>{testBand, testBand2};
+      //Assert
+      Assert.Equal(testList, result);
+    }
+    [Fact]
+    public void Test_GetBands_ReturnsAllVenueBands()
+    {
+      //Arrange
+      Venue testVenue = new Venue("The Catwalk");
+      testVenue.Save();
+      Band testBand1 = new Band("The LoudMouths");
+      testBand1.Save();
+      Band testBand2 = new Band("The NoiseMakers");
+      testBand2.Save();
+      List<Band> testList = new List<Band> {testBand1};
+      //Act
+      testVenue.AddBand(testBand1);
+      List<Band> savedBands = testVenue.GetBands();
+      //Assert
+      Assert.Equal(testList, savedBands);
     }
   }
 }

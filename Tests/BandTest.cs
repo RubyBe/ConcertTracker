@@ -16,6 +16,7 @@ namespace BandTracker
     public void Dispose()
     {
       Band.DeleteAll();
+      Venue.DeleteAll();
     }
     [Fact]
     public void Test_BandsEmptyAtFirst()
@@ -40,17 +41,17 @@ namespace BandTracker
       //Arrange
       Band testBand = new Band("The LoudMouths");
       testBand.Save();
-      //Act
-      List<Band> result = Band.GetAll();
       List<Band> testList = new List<Band>{testBand};
+      //Act
+      List<Band> resultList = Band.GetAll();
       //Assert
-      Assert.Equal(testList, result);
+      Assert.Equal(testList, resultList);
     }
     [Fact]
     public void Test_Save_AssignsIdToBandObject()
     {
       //Arrange
-      Band testBand = new Band("Household chores");
+      Band testBand = new Band("The Rough Nighters");
       testBand.Save();
       //Act
       Band savedBand = Band.GetAll()[0];
@@ -63,7 +64,7 @@ namespace BandTracker
     public void Test_Find_FindsBandInDatabase()
     {
       //Arrange
-      Band testBand = new Band("Household chores");
+      Band testBand = new Band("The NoiseMakers");
       testBand.Save();
       //Act
       Band foundBand = Band.Find(testBand.GetId());
