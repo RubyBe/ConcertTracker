@@ -17,7 +17,34 @@ namespace BandTracker
       _name = name;
       _id = Id;
     }
+    public string GetName()
+    {
+      return _name;
+    }
+    public void SetName(string name)
+    {
+      _name = name;
+    }
     // Other methods
+    // a method to override Equality and check instead for equality of names
+    public override bool Equals(System.Object otherVenue)
+    {
+      if (!(otherVenue is Venue))
+      {
+        return false;
+      }
+      else
+      {
+        Venue newVenue = (Venue) otherVenue;
+        bool nameEquality = (this.GetName() == newVenue.GetName());
+        return (nameEquality);
+      }
+    }
+    // a method to save a Venue record
+    public void Save()
+    {
+      return;
+    }
     // a method to get all Venue records
     public static List<Venue> GetAll()
     {
