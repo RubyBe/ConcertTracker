@@ -1,28 +1,42 @@
-<h1>Venues at which this band has played:</h1>
-
-<h2>Band: @Model["band"].GetName()</h2>
-<hr />
-@if (@Model["bandVenues"].Count != 0)
-{
-  <h4>This band has played at these venues:</h4>
-  <ul>
-    @foreach (var venue in @Model["bandVenues"])
-    {
-      <li>@venue.GetName()</li>
-    }
-  </ul>
-}
-<h4>Add a venue to this band:</h4>
-<form action='/band/add_venue' method='post'>
-  <input id='band-id' name='band-id' type='hidden' value='@Model["band"].GetId()'>
-  <label for='venue-id'>Select a venue</label>
-  <select id='venue-id' name='venue-id' type='text'>
-    @foreach (var venue in @Model["allVenues"])
-    {
-      <option value='@venue.GetId()'>@venue.GetName()</option>
-    }
-  </select>
-  <button type='submit'>Add</button>
-</form>
-
-<h4><a href="/">Return Home</a></h4>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- styles -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="Content/css/styles.css" rel="stylesheet" type="text/css">
+    <title>bandtracker</title>
+  </head>
+  <body>
+    <div class="container jumbotron">
+      <h2>Venues which @Model["band"].GetName() has played:</h2>
+      <hr />
+      @if (@Model["bandVenues"].Count != 0)
+      {
+        <ul>
+          @foreach (var venue in @Model["bandVenues"])
+          {
+            <li><h3>@venue.GetName()</h3></li>
+          }
+        </ul>
+      }
+    </div>
+    <div class="container jumbotron">
+      <h4>Add a venue to this band:</h4>
+      <form action='/band/add_venue' method='post'>
+        <input id='band-id' name='band-id' type='hidden' value='@Model["band"].GetId()'>
+        <label for='venue-id'>Select a venue</label>
+        <select id='venue-id' name='venue-id' type='text'>
+          @foreach (var venue in @Model["allVenues"])
+          {
+            <option value='@venue.GetId()'>@venue.GetName()</option>
+          }
+        </select>
+        <button type='submit'>Add</button>
+      </form>
+    </div>
+    <div class="container jumbotron">
+      <h4><a href="/">Return Home</a></h4>
+    </div>
+  </body>
+</html>

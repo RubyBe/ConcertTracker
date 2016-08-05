@@ -1,14 +1,28 @@
-<h1>Venues</h1>
-@if (@Model.Count == 0)
-{
-  <p>There are no venues.</p>
-}
-<ul>
-  @foreach (var venue in Model)
-  {
-    <li><a href="/venues/@venue.GetId()">@venue.GetName()</a>| <a href="/venue/edit/@venue.GetId()">Edit</a> | <a href="/venue/delete/@venue.GetId()">Delete</a></</li>
-  }
-</ul>
-<hr />
-<a href="/venues/new">Add new venue</a>
-<h4><a href="/">Return Home</a></h4>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- styles -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="Content/css/styles.css" rel="stylesheet" type="text/css">
+    <title>bandtracker</title>
+  </head>
+  <body>
+    <div class="container jumbotron">
+      <h1>Venues</h1>
+      @if (@Model.Count == 0)
+      {
+        <p>There are no venues.</p>
+      }
+      <ul>
+        @foreach (var venue in Model)
+        {
+          <li><h3><a href="/venues/@venue.GetId()">@venue.GetName()</a>  ---- | <a href="/venue/edit/@venue.GetId()">Edit</a> | <a href="/venue/delete/@venue.GetId()">Delete</a><h3/></li>
+        }
+      </ul>
+      <hr />
+      <h4><a href="/venues/new">Add New Venue</a></h4>
+      <h4><a href="/">Return Home</a></h4>
+    </div>
+  </body>
+</html>

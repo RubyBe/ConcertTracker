@@ -1,11 +1,21 @@
-<h1>View/Add/Update Venues</h1>
-
-
-
-<form action="/venues/new" method="post">
-  <label for="venue-name">Venue name</label>
-  <input id="venue-name" name="venue-name" type="text">
-  <button type="submit">Add</button>
-</form>
-
-<h4><a href="/">Return Home</a></h4>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- styles -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="Content/css/styles.css" rel="stylesheet" type="text/css">
+    <title>bandtracker</title>
+  </head>
+  <body>
+    <div class="container jumbotron">
+      <h1>View/Add/Update Venues</h1>
+      <form action="/venues/new" method="post">
+        <label for="venue-name">Venue name</label>
+        <input id="venue-name" name="venue-name" type="text">
+        <button type="submit">Add</button>
+      </form>
+      <h4><a href="/">Return Home</a></h4>
+    </div>
+  </body>
+</html>
