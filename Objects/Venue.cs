@@ -17,6 +17,10 @@ namespace BandTracker
       _name = name;
       _id = Id;
     }
+    public int GetId()
+    {
+      return _id;
+    }
     public string GetName()
     {
       return _name;
@@ -37,7 +41,8 @@ namespace BandTracker
       {
         Venue newVenue = (Venue) otherVenue;
         bool nameEquality = (this.GetName() == newVenue.GetName());
-        return (nameEquality);
+        bool idEquality = (this.GetId() == newVenue.GetId());
+        return (nameEquality && idEquality);
       }
     }
     // a method to save a Venue record
@@ -66,6 +71,12 @@ namespace BandTracker
       {
         conn.Close();
       }
+    }
+    // a method to return a single Venue record with an id
+    public Venue Find()
+    {
+      Venue foundVenue = new Venue(1);
+      return foundVenue;
     }
     // a method to get all Venue records
     public static List<Venue> GetAll()
