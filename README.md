@@ -1,10 +1,8 @@
 # _A Concert Tracker Program with C#, Nancy, Razor, and SQL Databases_
 
-#### _Project Specifications_
-
 #### By _**Sid Benavente**_
 
-## Description/Specs
+## Description/Specifications
 
 A program which allows tracking of concert events at venues in Seattle.
 

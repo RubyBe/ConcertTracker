@@ -108,7 +108,7 @@ namespace BandTracker
       SqlConnection conn = DB.Connection();
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("SELECT * FROM bands;", conn);
+      SqlCommand cmd = new SqlCommand("SELECT * FROM bands ORDER BY name;", conn);
 
       SqlDataReader rdr = cmd.ExecuteReader();
       List<Band> allBands = new List<Band>{};
@@ -169,12 +169,12 @@ namespace BandTracker
       SqlConnection conn = DB.Connection();
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("SELECT venues.* FROM bands JOIN events ON (bands.id = events.band_id) JOIN venues ON (events.venue_id = venues.id) WHERE bands.id = @BandId;", conn);
+      SqlCommand cmd = new SqlCommand("SELECT venues.* FROM bands JOIN events ON (bands.id = events.band_id) JOIN venues ON (events.venue_id = venues.id) WHERE bands.id = @BandId ORDER BY name;", conn);
       SqlParameter BandIdParameter = new SqlParameter();
       BandIdParameter.ParameterName = "@BandId";
       BandIdParameter.Value = this.GetId().ToString();
       cmd.Parameters.Add(BandIdParameter);
-      
+
       SqlDataReader rdr = cmd.ExecuteReader();
       List<Venue> venues = new List<Venue>{};
       while(rdr.Read())
