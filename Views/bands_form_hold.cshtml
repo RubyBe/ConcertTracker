@@ -9,15 +9,19 @@
   </head>
   <body>
     <div class="container jumbotron">
-      <h1>Add a New Band</h1>
+      <h1>Add a new band</h1>
       <form action="/bands/new" method="post">
         <label for="band-name">Band name:</label>
         <input id="band-name" name="band-name" type="text">
+        <select name="venue-id">
+          @foreach (var venue in Model)
+          {
+            <option value="@venue.GetId()">@venue.GetName()</option>
+          }
+        </select>
         <button type="submit">Add new band</button>
       </form>
-    </div>
-    <div class="container jumbotron">
-      <h4><a href="/bands">View All Bands</a></h4>
+      <p><a href="/bands">View all bands</a></p>
       <h4><a href="/">Return Home</a></h4>
     </div>
   </body>

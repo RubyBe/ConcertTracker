@@ -10,7 +10,7 @@ namespace BandTracker
     {
       Get["/"] = _ =>
       {
-        return View["index.cshtml", allVenues];
+        return View["index.cshtml"];
       };
       Get["/venues"] = _ => {
         List<Venue> AllVenues = Venue.GetAll();
@@ -67,7 +67,7 @@ namespace BandTracker
         return View["bands_form.cshtml", AllVenues];
       };
       Post["/bands/new"] = _ => {
-        Band newBand = new Band(Request.Form["band-name"], Request.Form["venue-id"]);
+        Band newBand = new Band(Request.Form["band-name"]);
         newBand.Save();
         return View["success.cshtml"];
       };

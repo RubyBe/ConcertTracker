@@ -9,12 +9,16 @@
   </head>
   <body>
     <div class="container jumbotron">
-      <h1>View/Add/Update Venues</h1>
+      <h1>Add a New Venue</h1>
+      <hr />
       <form action="/venues/new" method="post">
         <label for="venue-name">Venue name</label>
         <input id="venue-name" name="venue-name" type="text">
         <button type="submit">Add</button>
       </form>
+    </div>
+    <div class="container jumbotron">
+      <h4><a href = "/venues">View All Venues</a></h4>
       <h4><a href="/">Return Home</a></h4>
     </div>
   </body>

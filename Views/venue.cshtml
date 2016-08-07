@@ -10,18 +10,18 @@
   <body>
     <div class="container jumbotron">
       <h1>Venue: @Model["venue"].GetName()</h1>
-      <hr />
       @if (@Model["venueBands"].Count != 0)
       {
         <h3>Here are all the bands which have played this venue:</h3>
         <ul>
           @foreach (var band in @Model["venueBands"])
           {
-            <li>@band.GetName()</li>
+            <li><h3>@band.GetName()</h3></li>
           }
         </ul>
       }
-      <hr />
+    </div>
+    <div class="container jumbotron">
       <h3>Add an event to this venue:</h3>
       <form action='/venue/add_band' method='post'>
         <input id='venue-id' name='venue-id' type='hidden' value='@Model["venue"].GetId()'>
@@ -34,6 +34,9 @@
         </select>
         <button type='submit'>Add</button>
       </form>
+    </div>
+    <div class="container jumbotron">
+      <h4><a href="/venues">Return to Venues List</a></h4>
       <h4><a href="/">Return Home</a></h4>
     </div>
   </body>
