@@ -65,3 +65,4 @@ This web application was created using C#, Nancy, Razor, SQL, CSS, and Bootstrap
 Copyright (c) 2016 _**Sid Benavente**_
 
 This software is licensed under the MIT license.
+
